@@ -325,12 +325,12 @@ function App() {
   ========================================================= */
 
   const toggleFavorite = (pet) => {
-    if (favorites.includes(pet.id)) {
-      setFavorites(favorites.filter((id) => id !== pet.id));
+    if (favorites.includes(pet.name)) {
+      setFavorites((prev) => prev.filter((favoriteName) => favoriteName !== pet.name));
 
       showMessage(`${pet.name} removed from favorites.`, "info");
     } else {
-      setFavorites([...favorites, pet.id]);
+      setFavorites((prev) => [...prev, pet.name]);
 
       showMessage(`${pet.name} added to favorites!`, "success");
     }
@@ -1009,7 +1009,7 @@ function App() {
             filteredPets.map((pet) => (
 
               <Grid
-                key={pet.id}
+                key={pet.name}
                 size={{ xs: 12, sm: 6, md: 4 }}
               >
 
@@ -1031,7 +1031,7 @@ function App() {
                       }
                     >
 
-                      {favorites.includes(pet.id) ? (
+                      {favorites.includes(pet.name) ? (
                         <FavoriteIcon className="favorite-active" />
                       ) : (
                         <FavoriteBorderIcon />
@@ -1478,14 +1478,14 @@ function App() {
                   toggleFavorite(selectedPet)
                 }
                 startIcon={
-                  favorites.includes(selectedPet.id) ? (
+                  favorites.includes(selectedPet.name) ? (
                     <FavoriteIcon />
                   ) : (
                     <FavoriteBorderIcon />
                   )
                 }
               >
-                {favorites.includes(selectedPet.id)
+                {favorites.includes(selectedPet.name)
                   ? "Remove Favorite"
                   : "Add Favorite"}
               </Button>
